@@ -46,16 +46,16 @@ export default function BoardingPass() {
             </RevealButton>
           </div>
           <div className="space-y-4 rounded-lg border border-purple-600 bg-purple-300 p-4">
-            <p className="text-teal-900">
+            <p className="text-black">
               Mami hoy en tu dìa quiero recordarte lo mucho que te amo y lo agradecido que estoy con Dios,
               por darme a la mejor mama del mundo que siempre me ha apoyado y guiado con su amor incondicional
               gracias por ser mi ejemplo a seguir y por enseñarme valores que me han hecho la persona que soy hoy
             </p>
-            <p className="text-teal-900">
+            <p className="text-black">
               te amo demasiado y espero que este día esté lleno de alegría,
               asi como de amor y bendiciones que te acompañen siempre.
             </p>
-            <p className="text-teal-900">
+            <p className="text-black">
               Gracias por todo lo que haces por mí y por nuestra familia.
               Eres una madre increíble y te mereces lo mejor en este día especial y siempre.
               ¡Feliz cumple mamita 🥳🥳🥳!
