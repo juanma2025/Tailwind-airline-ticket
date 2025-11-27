@@ -1,125 +1,54 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useState } from "react"
+import RevealButton from "./RevealButton"
 
 export default function BoardingPass() {
-    const qrRef = useRef<HTMLCanvasElement>(null)
+    const [showLetter, setShowLetter] = useState(false)
+    const [animateIn, setAnimateIn] = useState(false)
 
     useEffect(() => {
-    if (typeof window !== "undefined" && qrRef.current) {
-        import("qrcode").then((QRCode) => {
-        QRCode.toCanvas(
-            qrRef.current,
-            "https://www.gabair.ng",
-            {
-            width: 100,
-            margin: 0,
-            color: {
-                dark: "#000000",
-                light: "#FFFFFF",
-            },
-            },
-            (error: any) => {
-            if (error) console.error(error)
-            },
-        )
-        })
+    if (showLetter) {
+        requestAnimationFrame(() => setAnimateIn(true))
+    } else {
+        setAnimateIn(false)
     }
-    }, [])
+    }, [showLetter])
 
     return (
-    <div className="boarding-pass">
-        <div className="boarding-pass-container">
-        {/* Top section */}
-        <div className="boarding-pass-top">
-            <div className="boarding-pass-red-line"></div>
-            <div className="boarding-pass-cities">
-            <div className="boarding-pass-city">
-                <div className="boarding-pass-city-name">LAGOS</div>
-                <div className="boarding-pass-city-code">LOS</div>
-                <div className="boarding-pass-time">01:45 PM</div>
-            </div>
-
-            <div className="boarding-pass-plane-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                />
-                </svg>
-            </div>
-
-            <div className="boarding-pass-city">
-                <div className="boarding-pass-city-name">ABUJA</div>
-                <div className="boarding-pass-city-code">ABV</div>
-                <div className="boarding-pass-time">02:45 PM</div>
-            </div>
-            </div>
-
-            <div className="boarding-pass-date">27 JULY 2016</div>
+    <div className="w-full max-w-xl px-4">
+        {!showLetter ? (
+        <div className="flex flex-col items-center justify-center gap-4">
+            <RevealButton onClick={() => setShowLetter(true)} />
         </div>
-
-        {/* Bottom section */}
-        <div className="boarding-pass-bottom">
-            <div className="boarding-pass-passenger">
-            <div>
-                <div className="boarding-pass-label">NAME</div>
-                <div className="boarding-pass-value">MR ESU G</div>
+        ) : (
+        <div
+            className={`mx-auto rounded-xl bg-white p-6 shadow-lg transition-all duration-500 ease-out sm:p-8 ${
+            animateIn ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-3 scale-95"
+            }`}
+        >
+            <div className="mb-4 flex items-center justify-between">
+            <h1 className="text-lg font-semibold text-gray-900 sm:text-xl">Carta</h1>
+            <button
+                type="button"
+                onClick={() => setShowLetter(false)}
+                className="inline-flex items-center gap-2 rounded-md bg-teal-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-300"
+            >
+                Volver
+            </button>
             </div>
-            <div className="boarding-pass-qr">
-                <canvas ref={qrRef}></canvas>
-            </div>
-            </div>
-
-                <div className="boarding-pass-flight-info">
-            <div>
-                <div className="boarding-pass-label">FLIGHT</div>
-                <div className="boarding-pass-value">AR124</div>
-            </div>
-            <div className="text-right">
-                <div className="boarding-pass-label">BOOKING REF</div>
-                <div className="boarding-pass-value">7ABC123</div>
-            </div>
-            </div>
-
-            <div className="boarding-pass-boarding-info">
-            <div>
-                <div className="boarding-pass-label">BOARDING</div>
-                <div className="boarding-pass-value">MMIA</div>
-            </div>
-            <div>
-                <div className="boarding-pass-label">GATE</div>
-                <div className="boarding-pass-value">3</div>
-            </div>
-            <div className="text-right">
-                <div className="boarding-pass-label">TIME</div>
-                <div className="boarding-pass-value">01:05 PM</div>
-            </div>
-            </div>
-
-            <div className="boarding-pass-footer">
-            <div className="boarding-pass-airline">
-                <div className="boarding-pass-airline-logo">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="12" fill="black" />
-                    <path
-                    d="M18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18C15.3137 18 18 15.3137 18 12Z"
-                    fill="white"
-                    />
-                    <path d="M12 6L16 12H8L12 6Z" fill="black" />
-                </svg>
-                </div>
-                <div className="boarding-pass-airline-website">www.gabair.ng</div>
-            </div>
-
-            <div className="boarding-pass-seat">
-                <div className="boarding-pass-seat-number">12B</div>
-            </div>
+            <div className="space-y-4 rounded-lg border border-teal-200 bg-teal-50 p-4">
+            <p className="text-teal-900">
+                Aquí irá la carta que me pases. El diseño es una tarjeta limpia
+                y centrada para lectura cómoda.
+            </p>
+            <p className="text-teal-900">
+                Puedes enviarme el contenido y lo integro manteniendo el estilo,
+                añadiendo resaltados o secciones si lo necesitas.
+            </p>
             </div>
         </div>
-        </div>
+        )}
     </div>
     )
 }
