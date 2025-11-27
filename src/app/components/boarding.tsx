@@ -16,39 +16,53 @@ export default function BoardingPass() {
     }, [showLetter])
 
     return (
-    <div className="w-full max-w-xl px-4">
+    <div className="w-full max-w-xl mx-auto px-4">
         {!showLetter ? (
-        <div className="flex flex-col items-center justify-center gap-4">
-            <RevealButton onClick={() => setShowLetter(true)} />
+        <div className="grid place-items-center gap-4 text-center">
+          <RevealButton
+            variant="primary"
+            size="lg"
+            onClick={() => setShowLetter(true)}
+          />
         </div>
-        ) : (
+      ) : (
         <div
-            className={`mx-auto rounded-xl bg-white p-6 shadow-lg transition-all duration-500 ease-out sm:p-8 ${
+          className={`mx-auto rounded-xl bg-purple-200 p-6 shadow-lg transition-all duration-500 ease-out sm:p-8 ${
             animateIn ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-3 scale-95"
-            }`}
+          }`}
         >
-            <div className="mb-4 flex items-center justify-between">
-            <h1 className="text-lg font-semibold text-gray-900 sm:text-xl">Carta</h1>
-            <button
-                type="button"
-                onClick={() => setShowLetter(false)}
-                className="inline-flex items-center gap-2 rounded-md bg-teal-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-300"
+          <div className="h-1 w-full rounded-t-lg bg-gradient-to-r from-purple-200 via-purple-400 to-purple-600" />
+          <div className="mb-4 flex items-center justify-between">
+            <h1 className="text-lg font-semibold text-gray-900 sm:text-xl">Mami</h1>
+            <RevealButton
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                setAnimateIn(false)
+                setTimeout(() => setShowLetter(false), 200)
+              }}
             >
-                Volver
-            </button>
-            </div>
-            <div className="space-y-4 rounded-lg border border-teal-200 bg-teal-50 p-4">
+              Volver
+            </RevealButton>
+          </div>
+          <div className="space-y-4 rounded-lg border border-purple-600 bg-purple-300 p-4">
             <p className="text-teal-900">
-                Aquí irá la carta que me pases. El diseño es una tarjeta limpia
-                y centrada para lectura cómoda.
+              Mami hoy en tu dìa quiero recordarte lo mucho que te amo y lo agradecido que estoy con Dios,
+              por darme a la mejor mama del mundo que siempre me ha apoyado y guiado con su amor incondicional
+              gracias por ser mi ejemplo a seguir y por enseñarme valores que me han hecho la persona que soy hoy
             </p>
             <p className="text-teal-900">
-                Puedes enviarme el contenido y lo integro manteniendo el estilo,
-                añadiendo resaltados o secciones si lo necesitas.
+              te amo demasiado y espero que este día esté lleno de alegría,
+              asi como de amor y bendiciones que te acompañen siempre.
             </p>
-            </div>
+            <p className="text-teal-900">
+              Gracias por todo lo que haces por mí y por nuestra familia.
+              Eres una madre increíble y te mereces lo mejor en este día especial y siempre.
+              ¡Feliz cumple mamita 🥳🥳🥳!
+            </p>
+          </div>
         </div>
-        )}
+      )}
     </div>
-    )
+  )
 }
